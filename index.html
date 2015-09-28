@@ -18,12 +18,8 @@
 </head>
 <body>
 
-<h1>
-    Set temperature:
-      <span id='current'>
-      </span>
-    °C
-</h1>
+<h1><span id='current'></span>°C</h1>
+<span id="message"></span>
 <button id='increase'>↑</button>
 <button id='decrease'>↓</button>
 <label for='esm'>Energy saving mode</label>
@@ -35,6 +31,48 @@
 <script src='src/Thermostat.js'></script>
 <script>
     var thermostat = new Thermostat();
+
+    function updateThermostatDisplay() {
+        $('#current').html(thermostat.currentTemperature);
+        $('#current').css('color', thermostat.colorStatus());
+        $('#message').empty();
+    }
+
+    function displayErrorMessage(e) {
+        $('#message').html(e.message + '<br>')
+    }
+
+    $(document).ready(function () {
+        updateThermostatDisplay();
+        $('#increase').click(function () {
+            try {
+                thermostat.increaseTemperature(1);
+                updateThermostatDisplay();
+            }
+            catch (e) {
+                displayErrorMessage(e);
+            }
+        });
+
+
+        $('#decrease').click(function () {
+            try {
+                thermostat.decreaseTemperature(1);
+                updateThermostatDisplay();
+            }
+            catch (e) {
+                displayErrorMessage(e);
+            }
+        });
+        $('#esm').on('change', function () {
+            thermostat.energySavingMode = $(this).prop('checked');
+        });
+        $('#reset').click(function () {
+            thermostat.setTemperature(20);
+            updateThermostatDisplay();
+        });
+    });
+
 </script>
 </body>
 </html>

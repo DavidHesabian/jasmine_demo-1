@@ -1,27 +1,3 @@
-function updateThermostatDisplay() {
-    $('#current').html(thermostat.currentTemperature);
-    $('#current').css('color', thermostat.colorStatus());
-};
-
-$(document).ready(function () {
-    updateThermostatDisplay();
-    $('#increase').click(function () {
-        thermostat.increaseTemperature(1);
-        updateThermostatDisplay();
-    });
-    $('#decrease').click(function () {
-        thermostat.decreaseTemperature(1);
-        updateThermostatDisplay();
-    });
-    $('#esm').on('change', function () {
-        thermostat.energySavingMode = $(this).prop('checked');
-    });
-    $('#reset').click(function () {
-        thermostat.setTemperature(20);
-        updateThermostatDisplay();
-    });
-})
-
 
 
 function Thermostat(temperature) {
