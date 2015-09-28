@@ -1,0 +1,40 @@
+<html>
+<head>
+    <meta charset='utf8'>
+    <title>Thermostat</title>
+    <style>
+        #current .red {
+            color: red;
+        }
+
+        #current .ornange {
+            color: orange;
+        }
+
+        #current .blue {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+<h1>
+    Set temperature:
+      <span id='current'>
+      </span>
+    °C
+</h1>
+<button id='increase'>↑</button>
+<button id='decrease'>↓</button>
+<label for='esm'>Energy saving mode</label>
+<input type='checkbox' id='esm' checked>
+<button id='reset'>Reset</button>
+
+
+<script src='https://code.jquery.com/jquery-2.1.4.js'></script>
+<script src='src/Thermostat.js'></script>
+<script>
+    var thermostat = new Thermostat();
+</script>
+</body>
+</html>
