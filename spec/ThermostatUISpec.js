@@ -11,4 +11,15 @@ describe('ThermostatUI', function() {
         expect('#current').toContainText('20');
     });
 
+    it('up button increases temperature', function(){
+        $("#increase").click();
+        expect('#current').toContainText('21');
+    });
+
+    it('down button decreases temperature', function(){
+        $("#decrease").click();
+        expect('#current').toContainText('19');
+    });
+
+
 });

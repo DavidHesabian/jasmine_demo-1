@@ -4,13 +4,13 @@ describe('Thermostat', function () {
     beforeEach(function () {
         thermostat = new Thermostat();
     });
-    describe('Thermostat temperature setting', function () {
+    describe('Thermostat temperature', function () {
 
-        it('sets the default temerature to 20', function () {
+        it('is set to default temerature to 20', function () {
             expect(thermostat.currentTemperature).toEqual(20);
         });
 
-        it('sets temperature to desired value', function () {
+        it('is set to desired value wit setTemperature', function () {
             thermostat.setTemperature(21);
             expect(thermostat.currentTemperature).toEqual(21);
         });
@@ -88,7 +88,7 @@ describe('Thermostat', function () {
         });
     });
 
-    describe('maximumTemperature', function() {
+    describe('maximumTemperature is set to', function() {
 
         it('25 degrees if Energy Savings mode is on', function() {
             thermostat.togglePowerSavingsMode(true);
@@ -101,9 +101,9 @@ describe('Thermostat', function () {
         });
     });
 
-    describe('minimumTemperature', function() {
+    describe('minimumTemperature is set to', function() {
 
-        it('10 degreen', function() {
+        it('10 degrees', function() {
            expect(thermostat.minimumTemperature()).toEqual(10)
         });
 
