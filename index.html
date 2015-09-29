@@ -2,19 +2,6 @@
 <head>
     <meta charset='utf8'>
     <title>Thermostat</title>
-    <style>
-        #current .red {
-            color: red;
-        }
-
-        #current .ornange {
-            color: orange;
-        }
-
-        #current .blue {
-            color: green;
-        }
-    </style>
 </head>
 <body>
 
@@ -22,57 +9,13 @@
 <span id="message"></span>
 <button id='increase'>↑</button>
 <button id='decrease'>↓</button>
-<label for='esm'>Energy saving mode</label>
-<input type='checkbox' id='esm' checked>
+<label for='mode'>Energy saving mode</label>
+<input type='checkbox' id='mode' checked>
 <button id='reset'>Reset</button>
 
 
 <script src='https://code.jquery.com/jquery-2.1.4.js'></script>
 <script src='src/Thermostat.js'></script>
-<script>
-    var thermostat = new Thermostat();
-
-    function updateThermostatDisplay() {
-        $('#current').html(thermostat.currentTemperature);
-        $('#current').css('color', thermostat.colorStatus());
-        $('#message').empty();
-    }
-
-    function displayErrorMessage(e) {
-        $('#message').html(e.message + '<br>')
-    }
-
-    $(document).ready(function () {
-        updateThermostatDisplay();
-        $('#increase').click(function () {
-            try {
-                thermostat.increaseTemperature(1);
-                updateThermostatDisplay();
-            }
-            catch (e) {
-                displayErrorMessage(e);
-            }
-        });
-
-
-        $('#decrease').click(function () {
-            try {
-                thermostat.decreaseTemperature(1);
-                updateThermostatDisplay();
-            }
-            catch (e) {
-                displayErrorMessage(e);
-            }
-        });
-        $('#esm').on('change', function () {
-            thermostat.energySavingMode = $(this).prop('checked');
-        });
-        $('#reset').click(function () {
-            thermostat.setTemperature(20);
-            updateThermostatDisplay();
-        });
-    });
-
-</script>
+<script src="src/app.js"></script>
 </body>
 </html>

@@ -1,5 +1,3 @@
-
-
 function Thermostat(temperature) {
     this.currentTemperature = (typeof temperature !== 'undefined' ? temperature : 20);
     this.energySavingMode = true;
@@ -27,13 +25,13 @@ Thermostat.prototype.decreaseTemperature = function (value) {
     }
 };
 
-Thermostat.prototype.maximumTemperature = function() {
+Thermostat.prototype.maximumTemperature = function () {
     if (this.energySavingMode)
         return 25;
     return 32;
 }
 
-Thermostat.prototype.minimumTemperature = function() {
+Thermostat.prototype.minimumTemperature = function () {
     return 10;
 }
 
@@ -41,11 +39,11 @@ Thermostat.prototype.togglePowerSavingsMode = function (value) {
     this.energySavingMode = value;
 };
 
-Thermostat.prototype.colorStatus = function() {
-    if(this.currentTemperature < 18) {
+Thermostat.prototype.colorStatus = function () {
+    if (this.currentTemperature < 18) {
         return "blue";
     }
-    else if(this.currentTemperature <= 25) {
+    else if (this.currentTemperature <= 25) {
         return "orange";
     }
     else {
