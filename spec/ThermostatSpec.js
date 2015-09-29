@@ -1,14 +1,19 @@
 describe('Thermostat', function () {
     var thermostat;
+    document.cookie = 'temperature' + '=; Max-Age=0'
 
     beforeEach(function () {
-        document.cookie = 'temperature' + '=; Max-Age=0'
         thermostat = new Thermostat();
     });
 
     afterEach(function () {
         document.cookie = 'temperature' + '=; Max-Age=0'
     });
+
+    it('Thermostat is defined', function () {
+        expect(Thermostat).toBeDefined();
+    });
+
     describe('Thermostat temperature', function () {
 
         it('is set to default temperature to 20', function () {
@@ -133,12 +138,18 @@ describe('Thermostat', function () {
 
     });
 
-    describe('Persisting data', function () {
-        it('sets a cookie when creating a new instance', function () {
+    describe('Persisting data in Cookie', function () {
+
+        it('creates a cookie when creating a new instance', function(){
+            expect(getSavedValueFromCookie('temperature')).toEqual('20')
+        });
+
+        it('reads from cookie', function () {
             thermostat.setTemperature(12);
             var savedTemperature = parseInt(thermostat.getDefaultTemperature());
-            expect(savedTemperature).toEqual(12)
+            expect(savedTemperature).toEqual(12);
         });
+
     });
 
 });

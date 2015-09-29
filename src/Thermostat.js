@@ -55,17 +55,27 @@ Thermostat.prototype.colorStatus = function () {
 };
 
 Thermostat.prototype.createOrUpdateThermostatCookie = function () {
-    this.saveValueInCookie('temperature', this.currentTemperature, 10)
+    saveValueInCookie('temperature', this.currentTemperature, 10)
 };
 
-Thermostat.prototype.saveValueInCookie = function (cname, cvalue, exdays) {
+
+Thermostat.prototype.getDefaultTemperature = function () {
+    var temperature = getSavedValueFromCookie("temperature");
+    if (temperature != "") {
+        return temperature;
+    } else {
+        return 20;
+    }
+};
+
+saveValueInCookie = function (cname, cvalue, exdays) {
     var d = new Date();
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
     var expires = "expires=" + d.toUTCString();
     document.cookie = cname + "=" + cvalue + "; " + expires;
 };
 
-Thermostat.prototype.getSavedValueInCookie = function (cname) {
+getSavedValueFromCookie = function (cname) {
     var name = cname + "=";
     var ca = document.cookie.split(';');
     for (var i = 0; i < ca.length; i++) {
@@ -74,13 +84,4 @@ Thermostat.prototype.getSavedValueInCookie = function (cname) {
         if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
     }
     return "";
-};
-
-Thermostat.prototype.getDefaultTemperature = function () {
-    var temperature = this.getSavedValueInCookie("temperature");
-    if (temperature != "") {
-        return temperature;
-    } else {
-        return 20;
-    }
 };
