@@ -1,10 +1,15 @@
 describe('ThermostatUI', function() {
 
     beforeEach(function() {
+        document.cookie = 'temperature' + '=; Max-Age=0'
         jasmine.getFixtures().fixturesPath = '.';
         loadFixtures('index.html');
         $.holdReady(false); //Tansaku's solution. Not needed if we load jQuery from CDN
         // See: https://github.com/velesin/jasmine-jquery/issues/244
+    });
+
+    afterEach(function () {
+        document.cookie = 'temperature' + '=; Max-Age=0'
     });
 
     it('displays thermostat default temperature', function(){

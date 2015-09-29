@@ -2,11 +2,16 @@ describe('Thermostat', function () {
     var thermostat;
 
     beforeEach(function () {
+        document.cookie = 'temperature' + '=; Max-Age=0'
         thermostat = new Thermostat();
+    });
+
+    afterEach(function () {
+        document.cookie = 'temperature' + '=; Max-Age=0'
     });
     describe('Thermostat temperature', function () {
 
-        it('is set to default temerature to 20', function () {
+        it('is set to default temperature to 20', function () {
             expect(thermostat.currentTemperature).toEqual(20);
         });
 
@@ -73,7 +78,7 @@ describe('Thermostat', function () {
     });
     describe('Energy savings mode', function () {
 
-        it('is on by default', function (){
+        it('is on by default', function () {
             expect(thermostat.energySavingMode).toEqual(true);
         });
 
@@ -88,30 +93,30 @@ describe('Thermostat', function () {
         });
     });
 
-    describe('maximumTemperature is set to', function() {
+    describe('maximumTemperature is set to', function () {
 
-        it('25 degrees if Energy Savings mode is on', function() {
+        it('25 degrees if Energy Savings mode is on', function () {
             thermostat.togglePowerSavingsMode(true);
             expect(thermostat.maximumTemperature()).toEqual(25)
         });
 
-        it('32 degrees if Energy Savings mode is off', function() {
+        it('32 degrees if Energy Savings mode is off', function () {
             thermostat.togglePowerSavingsMode(false);
             expect(thermostat.maximumTemperature()).toEqual(32)
         });
     });
 
-    describe('minimumTemperature is set to', function() {
+    describe('minimumTemperature is set to', function () {
 
-        it('10 degrees', function() {
-           expect(thermostat.minimumTemperature()).toEqual(10)
+        it('10 degrees', function () {
+            expect(thermostat.minimumTemperature()).toEqual(10)
         });
 
     });
 
-    describe('Colour status', function() {
+    describe('Colour status', function () {
 
-        it('shows blue if less than 18', function() {
+        it('shows blue if less than 18', function () {
             thermostat.currentTemperature = 15;
             expect(thermostat.colorStatus()).toEqual("blue");
         });
@@ -121,11 +126,19 @@ describe('Thermostat', function () {
             expect(thermostat.colorStatus()).toEqual("orange");
         });
 
-        it('shows red if anything else', function() {
+        it('shows red if anything else', function () {
             thermostat.currentTemperature = 33;
             expect(thermostat.colorStatus()).toEqual("red");
         });
 
+    });
+
+    describe('Persisting data', function () {
+        it('sets a cookie when creating a new instance', function () {
+            thermostat.setTemperature(12);
+            var savedTemperature = parseInt(thermostat.getDefaultTemperature());
+            expect(savedTemperature).toEqual(12)
+        });
     });
 
 });
