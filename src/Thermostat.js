@@ -29,11 +29,11 @@ Thermostat.prototype.maximumTemperature = function () {
     if (this.energySavingMode)
         return 25;
     return 32;
-}
+};
 
 Thermostat.prototype.minimumTemperature = function () {
     return 10;
-}
+};
 
 Thermostat.prototype.togglePowerSavingsMode = function (value) {
     this.energySavingMode = value;
