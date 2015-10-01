@@ -20,9 +20,25 @@ describe('Thermostat', function () {
             expect(thermostat.currentTemperature).toEqual(20);
         });
 
-        it('is set to desired value wit setTemperature', function () {
+        it('is set to desired value with setTemperature', function () {
             thermostat.setTemperature(21);
             expect(thermostat.currentTemperature).toEqual(21);
+        });
+
+        it('if temp is above 25 and psm is turned on then temp is reduced to 25', function () {
+            thermostat.currentTemperature = 30;
+            thermostat.energySavingMode = false;
+            thermostat.togglePowerSavingsMode(true);
+            expect(thermostat.currentTemperature).toEqual(25);
+
+        });
+
+        it('if temp is below 25 and psm is turned on then temp is not changed to 25', function () {
+            thermostat.currentTemperature = 20;
+            thermostat.energySavingMode = false;
+            thermostat.togglePowerSavingsMode(true);
+            expect(thermostat.currentTemperature).not.toEqual(25);
+
         });
 
         it('can be increased by 1', function () {
@@ -140,7 +156,7 @@ describe('Thermostat', function () {
 
     describe('Persisting data in Cookie', function () {
 
-        it('creates a cookie when creating a new instance', function(){
+        it('creates a cookie when creating a new instance', function () {
             expect(getSavedValueFromCookie('temperature')).toEqual('20')
         });
 

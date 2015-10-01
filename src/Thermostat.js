@@ -40,6 +40,14 @@ Thermostat.prototype.minimumTemperature = function () {
 
 Thermostat.prototype.togglePowerSavingsMode = function (value) {
     this.energySavingMode = value;
+    this.resetCurrentTemperature();
+};
+
+Thermostat.prototype.resetCurrentTemperature = function () {
+    if (this.currentTemperature > this.maximumTemperature()){
+        this.setTemperature(this.maximumTemperature());
+    }
+
 };
 
 Thermostat.prototype.colorStatus = function () {
